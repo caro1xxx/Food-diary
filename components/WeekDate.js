@@ -2,7 +2,7 @@ import date, { current } from "../utils/date";
 import { nanoid } from "nanoid";
 export const WeekDate = () => {
   let [weeks, currenDate] = date(current);
-  let week = ["一", "二", "三", "四", "五", "六", "天"];
+  let week = ["天", "一", "二", "三", "四", "五", "六"];
   return (
     <div className="Datebody">
       {weeks.map((item, index) => {

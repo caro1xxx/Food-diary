@@ -1,7 +1,7 @@
 import RecordVegetables from "./RecordVegetables";
 import RecordIrresolute from "./RecordIrresolute";
 import RecordNoodle from "./RecordNoodle";
-import RecordCustomizable from "./RecordCustomizable";
+import RecordCustomizable from "./RecordMilk";
 
 export const Record = () => {
   return (

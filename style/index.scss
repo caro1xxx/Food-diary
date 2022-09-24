@@ -10,6 +10,8 @@
 }
 
 .Datebody{
+  user-select: none;
+  cursor: default;
   position:relative;
   display: flex;
   background-color: #0d6efd;
@@ -28,15 +30,18 @@
 
 .BackGroundBody{
   position: absolute;
+  overflow: hidden;
   top:0;
-  left: 20px;
-  right: 0;
+  left: 0;
+  right: -50px;
   bottom: 0;
   z-index: -10;
 }
 
 
 .Logo{
+  user-select: none;
+  cursor:grab;
   color: #0d6efd;
   font-style: oblique;
   font-weight: bolder;
@@ -76,7 +81,8 @@
 .DateTitle{
   user-select: none;
   cursor: grab;
-  margin-left: 10px;
+  margin-left: 30px;
+  margin-top: 20px;
   div{
     display: inline-block;
     background-color: #f1f1f1;
@@ -89,6 +95,7 @@
   cursor:default;
   width: 100%;
   margin-top: 10px;
+  margin-left: 20px;
   height: 300px;
   overflow:scroll;
   .dayMonth{
@@ -104,10 +111,10 @@
   }
   .year{
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
     font-size: 13px;
-    line-height: 40px;
+    line-height: 25px;
     text-align: center;
     margin: 10px 10px;
     border-radius: 100px;

@@ -5,12 +5,12 @@ const thirtyMonth = [2, 4, 6, 9, 11];
 // 一周日期
 function weeksDate(d) {
   let week = d.getDay();
-  let current = d.getDate();
+  let current = week;
   let weeks = [];
-  for (let i = week, j = 0; i <= 7; i++, j++) {
-    weeks[i - 1] = current + j;
+  for (let i = week, j = 0; i < 7; i++, j++) {
+    weeks[i] = current + j;
   }
-  for (let i = week - 2, j = 1; i >= 0; i--, j++) {
+  for (let i = week - 1, j = 1; i >= 0; i--, j++) {
     weeks[i] = current - j;
   }
   return [weeks, current];
@@ -48,7 +48,7 @@ export const cacultionDate = (year, month, type) => {
 
 export const createYear = (currentYear) => {
   let year = [];
-  for (let i = currentYear; i < currentYear + 35; i++) {
+  for (let i = currentYear; i < currentYear + 20; i++) {
     year.push(i);
   }
   return year;

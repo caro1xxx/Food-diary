@@ -117,7 +117,7 @@ export const Date = () => {
         {/* dList为要渲染的次数的数组 */}
         {dList.map((item, index) => {
           // 如果dList长度大于32,代表是渲染的年数,反之就是天数||月数
-          return dList.length < 32 ? (
+          return dList.length != 20 ? (
             <div className="dayMonth" key={nanoid()}>
               {/* 如果dlist长度为12说明是渲染月 */}
               {dList.length == 12 ? (
