@@ -1,24 +1,22 @@
 import PubSub from "pubsub-js";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getCurrentDate, formatDate } from "../utils/date";
 import * as echarts from "echarts";
 export const Chart = () => {
   // 获取当前时间
   const currentDate = getCurrentDate();
-  // 格式化今天时间
-  const formatCurrentDate = formatDate(currentDate);
   // 时间
   const [date, setDate] = useState({
     year: currentDate[0],
     month: currentDate[1],
     day: currentDate[2],
   });
+  const dateCopy = {};
+
+  const [ShowChart, setShowChart] = useState("block");
+
   // 食物
-  const [food, setFood] = useState({
-    noodle: 0,
-    irresolute: 0,
-    vegetables: 0,
-  });
+  const food = { noodle: 0, irresolute: 0, vegetables: 0 };
 
   let token = PubSub.subscribe("DateChange", (msg, value) => {
     setDate({
@@ -26,9 +24,8 @@ export const Chart = () => {
       month: value.month,
       day: value.day,
     });
-    return function () {
-      PubSub.unsubscribe(token); // 取消订阅消息
-    };
+
+    PubSub.unsubscribe(token); // 取消订阅消息
   });
 
   const echartInit = () => {
@@ -57,7 +54,9 @@ export const Chart = () => {
   };
 
   useEffect(() => {
+    let formatCurrentDate = formatDate([date.year, date.month, date.day]);
     if (localStorage.getItem(formatCurrentDate)) {
+      setShowChart("block");
       const value = JSON.parse(localStorage.getItem(formatCurrentDate));
       const valueFalt = [...value[formatCurrentDate]];
       // reduce统计每种食物出现次数
@@ -69,21 +68,29 @@ export const Chart = () => {
         }
         return prev;
       }, {});
-      setFood({
+      food = {
         noodle: result.noodle || 0,
         irresolute: result.irresolute || 0,
         vegetables: result.vegetables || 0,
-      });
+      };
+    } else {
+      // 如果当前日期没有记录
+      setShowChart("none");
     }
-  }, []);
+  }, [date]);
 
   useEffect(() => {
-    echartInit();
+    if (ShowChart) {
+      echartInit();
+    }
   }, [food]);
 
   return (
     <div style={{ width: "55%", height: "360px", padding: "20px" }}>
-      <div id="chart" style={{ width: "100%", height: "100%" }}></div>
+      <div
+        id="chart"
+        style={{ width: "100%", height: "100%", display: ShowChart }}
+      ></div>
     </div>
   );
 };

@@ -127,7 +127,8 @@ export const Date = () => {
                 ) : (
                   // 反之普通
                   <div
-                    onClick={() => {
+                    onClick={(event) => {
+                      event.stopPropagation();
                       select(index + 1, "month");
                     }}
                   >
@@ -141,7 +142,8 @@ export const Date = () => {
               ) : (
                 // 反之普通
                 <div
-                  onClick={() => {
+                  onClick={(event) => {
+                    event.stopPropagation();
                     select(index + 1, "day");
                   }}
                 >
@@ -156,7 +158,8 @@ export const Date = () => {
                 <div className="highlight">{item}</div>
               ) : (
                 <div
-                  onClick={() => {
+                  onClick={(event) => {
+                    event.stopPropagation();
                     select(item, "year");
                   }}
                 >
